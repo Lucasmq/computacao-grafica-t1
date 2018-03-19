@@ -367,7 +367,7 @@ void DrawLine(VERTICES v1, VERTICES v2, COR p, COR p1){
   	
 
 	//PintaTriangulo(va, vb, vc, p1, p1);
-	PintaTriangulo(vb, va, vc, p, p);
+	PintaTriangulo(vb, va, vc, p1, p1);
 	PintaTriangulo(vc, vb, va, p1, p);
 
 
@@ -381,6 +381,10 @@ void DrawTriangle(VERTICES va, VERTICES vb, VERTICES vc, COR p, COR p1, COR p2){
 
 void testeT(VERTICES va, VERTICES vb, VERTICES vc, float taxa, COR p, COR p1, COR p2){
 	float j = 0.1;
+	int xbar,ybar,distx,disty,auxx,auxy;
+
+	xbar = (va.x + vb.x + vc.x)/3;
+	ybar = (va.y + vb.y + vc.y)/3;
 
 	va.x = va.x*(taxa);
 	va.y = va.y*(taxa);
@@ -392,8 +396,10 @@ void testeT(VERTICES va, VERTICES vb, VERTICES vc, float taxa, COR p, COR p1, CO
 	vc.y = vc.y*(taxa);
 
 	//taxa = taxa - i;
-	for(int i = 100; i >= 0; i--){
-		j = i/100;
+	for(float i = 100; i >= 0; i--){
+		j = 0.979;
+
+
 		va.x = va.x*(j);
 		va.y = va.y*(j);
 
@@ -402,6 +408,26 @@ void testeT(VERTICES va, VERTICES vb, VERTICES vc, float taxa, COR p, COR p1, CO
 
 		vc.x = vc.x*(j);
 		vc.y = vc.y*(j);
+
+		auxx = xbar;
+		auxy = ybar;
+		xbar = (va.x + vb.x + vc.x)/3;
+		ybar = (va.y + vb.y + vc.y)/3;
+		distx = auxx - xbar;
+		disty = auxy - ybar;
+
+		va.x += distx;
+		va.y += disty;
+
+		vb.x += distx;
+		vb.y += disty;
+
+		vc.x += distx;
+		vc.y += disty;
+
+		xbar = (va.x + vb.x + vc.x)/3;
+		ybar = (va.y + vb.y + vc.y)/3;
+
 		DrawTriangle(va,vb,vc,p,p1,p2);
 	}
 	//DrawTriangle(va,vb,vc,p,p1,p2);

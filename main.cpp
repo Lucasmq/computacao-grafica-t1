@@ -33,9 +33,9 @@ DrawLine(0,256,511,256,100,0,123,255);*/
 COR p = {255,0,0,255};
 COR p1 = {0,0,255,255};
 COR p2 = {0,255,0,255};
-VERTICES v = {450,350};
+VERTICES v = {0,256};
 VERTICES v1 ={256,60};
-VERTICES v2 ={100,200};
+VERTICES v2 ={450,256};
 VERTICES v3 ={0,511};
 VERTICES v4 ={256,256};
 VERTICES v5 ={480,480};
@@ -52,9 +52,9 @@ VERTICES v5 ={480,480};
 //printf("\n Pixel = %d", m[0]);
 //PutPixel(x1,y1,0,255,0,255);
 //DrawTriangle(v,v1,v2,p,p1,p2);
-//preencherTriangulo(v,v1,v2,p,p2,p1);
+preencherTriangulo(v,v1,v2,p,p2,p1);
 //DrawTriangle(v3,v4,v5,p,p1,p2);
-testeT(v,v1,v2,1,p,p1,p2);
+//testeT(v,v1,v2,1,p,p1,p2);
 /*for(int i = 0; i <= 511; i++){
 	DrawLine(0, i, 511, 511-i,0,0,255,255);
 	DrawLine(i, 511, 511-i, 0,0,255,0,255);
