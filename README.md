@@ -23,3 +23,5 @@ parâmetros as posições dos três vértices (xa,ya), (xb,yb) e (xc,yc) bem com
 de cada um dos vértices. As cores dos pixels das arestas do triângulo devem ser obtidas através
 da interpolação linear das cores de seus vértices. Não é necessário o preenchimento do
 triângulo!
+
+![alt text](https://github.com/Lucasmq/computacao-grafica-t1/blob/master/imagens/triangulo_preenchido.jpg)
