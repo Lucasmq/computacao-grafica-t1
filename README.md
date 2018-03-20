@@ -51,7 +51,7 @@ Exemplo de uma reta pelo algoritmo e função DrawLine, onde recebe dois vértic
 
 Octantes:
 
-![alt text](https://github.com/Lucasmq/computacao-grafica-t1/blob/master/imagens/retas_octantes.jpg)
+![alt text](https://github.com/Lucasmq/computacao-grafica-t1/blob/master/imagens/octantes_real.png)
 
 Após a configuração para todos os octantes, podemos ver as retas geradas em varias direções:
 
@@ -80,11 +80,11 @@ da interpolação linear das cores de seus vértices.
 
 Para fazer o triangulo, basta receber três vertices e chamar a função DrawLine(); três vezes para formar 3 retas.
 
-![alt text](drawTriangle)
+![alt text](https://github.com/Lucasmq/computacao-grafica-t1/blob/master/imagens/drawTriangle.jpg)
 
 Após a chamada é gerado um triangulo com as cores interpoladas.
 
-![alt text](triangulo_interpolado)
+![alt text](https://github.com/Lucasmq/computacao-grafica-t1/blob/master/imagens/triangulo_interpolado_vazio.jpg)
 
 ## Preenchimento do Triângulo
 
