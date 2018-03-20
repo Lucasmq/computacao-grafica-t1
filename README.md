@@ -14,21 +14,21 @@ Os pixels estão dispostos nas telas em uma matriz de pontos que cada elemento p
 
 Para acessar é criado duas estruturas.
 
-![alt text](struct.jpg)
+![alt text](https://github.com/Lucasmq/computacao-grafica-t1/blob/master/imagens/struct.jpg)
 
 Como a tela gerada pelo framework é uma tela de 512x512 pixels, para acendermos temos que entender como é armazenado suas coordenadas.
 
-![alt text](pixel.png)
+![alt text](https://github.com/Lucasmq/computacao-grafica-t1/blob/master/imagens/pixels.png)
 
 Para isso, dado uma coordenada na tela, utilizaremos do seguinte calculo para acessar cada componente de cada pixel.
 
-![alt text](putpixel.jpg)
+![alt text](https://github.com/Lucasmq/computacao-grafica-t1/blob/master/imagens/putpixel.jpg)
 
 Onde o IMAGE_WIDTH representa o tamanho da tela de 512, com isso o ponteiro FBptr aponta para a posição inicial da memória de video, onde estão armazenados as informações do primeiro pixel no monitor, representado pelos 4 primeiros bytes. Os proximos 4 bytes representam o próximo pixel e assim sucessivamente. Assim é possivel rasterizar um pixel em qualquer posição da tela.
 
 Exemplo do funcionamento do do PutPixel() com dois pixels na tela:
 
-![alt text](putpixel_funcionando.jpg)
+![alt text](https://github.com/Lucasmq/computacao-grafica-t1/blob/master/imagens/putpixel_funcionando.jpg)
 
 
 	
@@ -47,29 +47,29 @@ O algoritmo de inicio serve apenas para o primeiro octante, pois ele vai increme
 
 Exemplo de uma reta pelo algoritmo e função DrawLine, onde recebe dois vértices e o parametro de COR (no caso 0,255,0,255):
 
-![alt text](reta.jpg)
+![alt text](https://github.com/Lucasmq/computacao-grafica-t1/blob/master/imagens/reta.jpg)
 
 Octantes:
 
-![alt text](octantes)
+![alt text](octantes_real)
 
 Após a configuração para todos os octantes, podemos ver as retas geradas em varias direções:
 
-![alt text](retas_octantes.jpg)
+![alt text](https://github.com/Lucasmq/computacao-grafica-t1/blob/master/imagens/retas_octantes.jpg)
 
 ### Interpolação de Cores
 
 Após a formação da reta, vamos receber dois vertices, cada um com uma cor, e vamos interpolar essas cores entre a reta. Primeiramente é usado a distáncia entre o eixo X e Y dos vertices e obtemos dx e dy. Com isso calculamos a diferença de cada componente dos pixels entre os vertices e dividimos esse valor obtido por dx ou dy. O que determinarará qual dos dois utilizar vai ser de qual octante irá pertencer a reta, se ela incrementa em X ou Y.
 
-![alt text](reta_interpolada)
+![alt text](https://github.com/Lucasmq/computacao-grafica-t1/blob/master/imagens/reta_interpolada.jpg)
 
 Também foi testado utilizando a distância entre os dois pontos pela seguinte fórmula para substituição do uso do dx e dy.
 
-![alt text](formula da distancia)
+![alt text](figura formula da distancia)
 
 Além de aumentar o número de calculos, foi observada que com o uso da distância entre os dois pontos, uma cor predominava mais que a outra, como podemos ver nessa imagem onde o azul predomina mais pela reta do que a cor verde, o que não ocorre no uso do dx e dy.
  
-![alt text](reta interpolada dist)
+![alt text](https://github.com/Lucasmq/computacao-grafica-t1/blob/master/imagens/reta_interpolada_dist.jpg)
 
 ## DrawTriangle(): 
 	
