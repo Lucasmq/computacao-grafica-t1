@@ -124,7 +124,7 @@ void DrawLine(VERTICES v1, VERTICES v2, COR p, COR p1){
 	        //printf("\n Distancia = %d", dist);
 	        //dist = 120
 
-	        
+
 	        Rf = (float(p1.R) - float(p.R))/(float(dy));
 	    	Gf = (float(p1.G) - float(p.G))/(float(dy));
 	    	Bf = (float(p1.B) - float(p.B))/(float(dy));
@@ -144,7 +144,7 @@ void DrawLine(VERTICES v1, VERTICES v2, COR p, COR p1){
 	        	tempP.R = R;
 	        	tempP.G = G;
 	        	tempP.B = B;
-	        	printf("\n INCREMENTA EM Y");
+	        	//printf("\n INCREMENTA EM Y");
 
 	            PutPixel(tempV, tempP);
 
@@ -203,7 +203,7 @@ void DrawLine(VERTICES v1, VERTICES v2, COR p, COR p1){
 	        	tempP.R = R;
 	        	tempP.G = G;
 	        	tempP.B = B;
-printf("\n INCREMENTA EM X");
+//printf("\n INCREMENTA EM X");
 	            PutPixel(tempV, tempP);
 
 	            if (d <= 0){
@@ -269,7 +269,7 @@ printf("\n INCREMENTA EM X");
 
 	        //COR tempP;
 
-	        printf("\n Distancia = %d", dist);
+	        //printf("\n Distancia = %d", dist);
 	        //dist = 120;
 	        Rf = (float(p1.R) - float(p.R))/(float(dx));
 	    	Gf = (float(p1.G) - float(p.G))/(float(dx));
@@ -367,13 +367,23 @@ printf("\n INCREMENTA EM X");
 	  }
 
 
-  void preencherTriangulo(VERTICES va, VERTICES vb, VERTICES vc, COR p, COR p1, COR p2){
+
+  void preencherTrianguloBaricentro(VERTICES va, VERTICES vb, VERTICES vc, COR p, COR p1, COR p2){
   	
-
+  	VERTICES vBar = {(va.x+vb.x+vc.x)/3,(va.y+vb.y+vc.y)/3};
 	//PintaTriangulo(va, vb, vc, p1, p1);
-	PintaTriangulo(vb, va, vc, p, p1);
-	PintaTriangulo(vc, vb, va, p1, p);
+	PintaTriangulo(vBar, va, vb, p, p1);
+	PintaTriangulo(vBar, vb, vc, p1, p2);
+	PintaTriangulo(vBar, vc, va, p2, p);
 
+ }	//PintaTriangulo(va, vb, vc, p1, p1);
+	//PintaTriangulo(vb, va, vc, p, p1);
+
+
+ void preencherTriangulo(VERTICES va, VERTICES vb, VERTICES vc, COR p, COR p1, COR p2){
+  	
+  	PintaTriangulo(vb, va, vc, p, p);
+	PintaTriangulo(vc, vb, va, p1, p);
 
  }
 
@@ -383,28 +393,47 @@ void DrawTriangle(VERTICES va, VERTICES vb, VERTICES vc, COR p, COR p1, COR p2){
 	DrawLine(vc,va,p2,p);
 }
 
-void testeT(VERTICES va, VERTICES vb, VERTICES vc, float taxa, COR p, COR p1, COR p2){
-	float j = 0.1;
+ void preencherTrianguloRecursivo(VERTICES va, VERTICES vb, VERTICES vc, COR p, COR p1, COR p2){
+  	
+  	VERTICES vBar = {(va.x+vb.x+vc.x)/3,(va.y+vb.y+vc.y)/3};
+	//PintaTriangulo(va, vb, vc, p1, p1);
+	DrawTriangle(va, vb, vc, p, p1, p2);
+
+	va.x = va.x+1;
+	va.y = va.y-1;
+
+	vb.x = vb.x;
+	vb.y = vb.y+1;
+
+	vc.x = vc.x-1;
+	vc.y = vc.y-1;
+
+	if(vBar.x == va.x || vBar.x == vb.x || vBar.x == vc.x){
+		return;
+	}
+	preencherTrianguloRecursivo(va,vb,vc,p,p1,p2);
+ }
+
+void trianguloEscala(VERTICES va, VERTICES vb, VERTICES vc, COR p, COR p1, COR p2){
+	float j;
 	int xbar,ybar,distx,disty,auxx,auxy;
 
-	xbar = (va.x + vb.x + vc.x)/3;
+	xbar = (va.x + vb.x + vc.x)/3; // Calcula o baricentro do triangulo
 	ybar = (va.y + vb.y + vc.y)/3;
 
-	va.x = va.x*(taxa);
-	va.y = va.y*(taxa);
+	va.x = va.x;
+	va.y = va.y;
 
-	vb.x = vb.x*(taxa);
-	vb.y = vb.y*(taxa);
+	vb.x = vb.x;
+	vb.y = vb.y;
 
-	vc.x = vc.x*(taxa);
-	vc.y = vc.y*(taxa);
+	vc.x = vc.x;
+	vc.y = vc.y;
 
-	//taxa = taxa - i;
-	for(float i = 100; i >= 0; i--){
-		j = 0.979;
+	for(float i = 400; i >= 0; i--){ //Número de triâgulos gerados
+		j = 0.98; // fator de multiplicação dos triagulos
 
-
-		va.x = va.x*(j);
+		va.x = va.x*(j); 	// multiplica por cada vértice pelo fator de multiplicação
 		va.y = va.y*(j);
 
 		vb.x = vb.x*(j);
@@ -413,14 +442,14 @@ void testeT(VERTICES va, VERTICES vb, VERTICES vc, float taxa, COR p, COR p1, CO
 		vc.x = vc.x*(j);
 		vc.y = vc.y*(j);
 
-		auxx = xbar;
+		auxx = xbar;		// salva o valor do baricentro do triangulo anterior
 		auxy = ybar;
-		xbar = (va.x + vb.x + vc.x)/3;
+		xbar = (va.x + vb.x + vc.x)/3;		// calcula o baricentro do novo triangulo
 		ybar = (va.y + vb.y + vc.y)/3;
-		distx = auxx - xbar;
+		distx = auxx - xbar;				// calcula a distancia dos triangulos
 		disty = auxy - ybar;
 
-		va.x += distx;
+		va.x += distx;						// da um offset no novo triagulo gerado para ir para o centro do anterior 
 		va.y += disty;
 
 		vb.x += distx;
@@ -429,16 +458,12 @@ void testeT(VERTICES va, VERTICES vb, VERTICES vc, float taxa, COR p, COR p1, CO
 		vc.x += distx;
 		vc.y += disty;
 
-		xbar = (va.x + vb.x + vc.x)/3;
+		xbar = (va.x + vb.x + vc.x)/3;		//  calcula o baricentro do novo triangulo para depois reiniciar o ciclo
 		ybar = (va.y + vb.y + vc.y)/3;
 
 		DrawTriangle(va,vb,vc,p,p1,p2);
 	}
-	//DrawTriangle(va,vb,vc,p,p1,p2);
-	//if(taxa == 0){
-	//	return;
-	//}
-	//testeT(va,vb,vc,taxa,p,p1,p2);
+
 
 }
 #endif // _MYGL_H_

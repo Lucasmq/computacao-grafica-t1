@@ -34,18 +34,18 @@ COR p = {255,0,0,255};
 COR p1 = {0,0,255,255};
 COR p2 = {0,255,0,255};
 VERTICES v  ={0,511};
-VERTICES v1 ={511,0};
-VERTICES v2 ={50,256};
+VERTICES v1 ={256,0};
+VERTICES v2 ={511,511};
 VERTICES v3 ={400,389};
-VERTICES v4 ={256,0};
-VERTICES v5 ={256,511};
+VERTICES v4 ={200,100};
+VERTICES v5 ={100,300};
 VERTICES v6 ={0,0};
 VERTICES v7 ={511,511};
 VERTICES v8 ={511,256};
 
 
 //DrawLine( v, v1, p2, p);
-DrawLine(v, v1, p1, p2);
+//DrawLine(v, v1, p1, p2);
 //DrawLine(v4, v5, p2, p1);
 //DrawLine(v6, v7, p2, p1);
 
@@ -58,10 +58,12 @@ DrawLine(v, v1, p1, p2);
 //printf("\n Pixel = %d", m[0]);
 //PutPixel(v1,p2);
 //PutPixel(v4,p1);
+//preencherTrianguloBaricentro(v,v1,v2,p,p1,p2);
+preencherTriangulo(v3,v4,v5,p1,p1,p1);
+//preencherTrianguloRecursivo(v,v1,v2,p,p1,p2);
 //DrawTriangle(v,v1,v2,p,p1,p2);
-//preencherTriangulo(v6,v7,v8,p,p2,p1);
-//DrawTriangle(v3,v4,v5,p,p1,p2);
-//testeT(v,v1,v2,1,p,p1,p2);
+//trianguloEscala(v,v1,v2,p,p1,p2);
+//trianguloEscala(v,v1,v2,p,p1,p2);
 /*for(int i = 0; i <= 500; i=i+100){
 	VERTICES k  ={0,i};
 	VERTICES l ={510,510-i};

@@ -51,7 +51,7 @@ Exemplo de uma reta pelo algoritmo e função DrawLine, onde recebe dois vértic
 
 Octantes:
 
-![alt text](octantes_real)
+![alt text](https://github.com/Lucasmq/computacao-grafica-t1/blob/master/imagens/retas_octantes.jpg)
 
 Após a configuração para todos os octantes, podemos ver as retas geradas em varias direções:
 
@@ -65,7 +65,7 @@ Após a formação da reta, vamos receber dois vertices, cada um com uma cor, e 
 
 Também foi testado utilizando a distância entre os dois pontos pela seguinte fórmula para substituição do uso do dx e dy.
 
-![alt text](figura formula da distancia)
+![alt text](https://github.com/Lucasmq/computacao-grafica-t1/blob/master/imagens/figura_dista_entre_pontos.jpg)
 
 Além de aumentar o número de calculos, foi observada que com o uso da distância entre os dois pontos, uma cor predominava mais que a outra, como podemos ver nessa imagem onde o azul predomina mais pela reta do que a cor verde, o que não ocorre no uso do dx e dy.
  
@@ -76,7 +76,82 @@ Além de aumentar o número de calculos, foi observada que com o uso da distânc
 Função que desenha as arestas de um triângulo na tela, recebendo como
 parâmetros as posições dos três vértices (xa,ya), (xb,yb) e (xc,yc) bem como as cores (RGBA)
 de cada um dos vértices. As cores dos pixels das arestas do triângulo devem ser obtidas através
-da interpolação linear das cores de seus vértices. Não é necessário o preenchimento do
-triângulo!
+da interpolação linear das cores de seus vértices.
 
-![alt text](https://github.com/Lucasmq/computacao-grafica-t1/blob/master/imagens/triangulo_preenchido.jpg)
+Para fazer o triangulo, basta receber três vertices e chamar a função DrawLine(); três vezes para formar 3 retas.
+
+![alt text](drawTriangle)
+
+Após a chamada é gerado um triangulo com as cores interpoladas.
+
+![alt text](triangulo_interpolado)
+
+## Preenchimento do Triângulo
+
+Foram feitas varias tentativas de preechimento do triângulo, a primeira tentativa foi encontrar o baricentro do triangulo e apartir dele criar retas que iriam do centro até cada ponto das retas que compõem os lados do triângulo.
+
+
+![alt text](função_baricentro)
+
+Triângulo gerado:
+
+![alt text](triangulo preenchido baricentro)
+
+As 3 cores não ficaram bem interpoladas e da para ver alguns pixels que não foram preenchidos por conta do algoritmo de Bresenham.
+
+Também foi pensando da possibilidade de permanencer chamando a função de desenhar triangulo recursivamente diminuindo o triângulo até chegar no menor possivel, que no caso seria o baricentro, mas não foi implementado um codigo que trate bem para todos os casos, foi mais por curiosidade.
+
+![alt text](função triangulo recursivo)
+
+Triângulo gerado:
+
+![alt text](triangulo recursivo)
+
+A interpolação nesse melhorou muito em comparação ao outro, mas ainda apresenta alguns bugs, e também essa função não está pronta para receber qualquer vertices, foi somente para curiosidade.
+
+
+Outro método pensado foi a criação de vários triângulos um detro do outro sofrendo uma variação de escala e um offset já que ele não está na origem.
+
+![alt text](função triangulo escala)
+
+Triângulo gerado:
+
+![alt text](triagulo escala_95)
+
+Como podemos ver o triângulo fica todo vazado, mas se aumentar o fator de multiplicação e o número de triângulos gerados podemos ver uma melhoria no preenchimento, mas mesmo assim não satisfatório.
+
+![alt text](triangulo escala 98 400)
+
+
+Por fim, o último testado foi o que escolhe um vertice, e a partir dele gera varias retas que se juntam com cada ponto da reta gerado, formando no fim o triângulo. Mas essa forma só interpola 2 cores ao triangulo.
+
+![alt text](função triangulo retas)
+
+Triâgulo gerado:
+
+![alt text](triangulo retas interpolado)
+
+O triângulo apresenta alguns lugares sem preenchimento por conta do algoritmo de Bresenham, o que pode ser feito é gerar outro triângulo a partir e outro vertice, preenchendo os pixels pretos.
+
+![alt text](função triangulo retas2)
+
+Triâgulo gerado:
+
+![alt text](triangulo retas interpolado 2)
+
+E por fim, se preferir usar um triângulo de uma unica cor, basta chamar a função com as mesmas cores, assim preenchendo o triâgulo por completo.
+
+![alt text](triangulo preenchido cor)
+
+## Considerações Finais
+
+A função mais trabalhosa é a DrawLine, onde temos que adaptar o algoritmo de Bresenham para os 8 octantes, depois disso para desenhar o triângulo torna-se simples. O que apresentou algum trabalho também foi a interpolação por conta de arredondamentos na hora de incrementar as componentes das cores.
+
+### Referências
+
+- https://it.wikipedia.org/wiki/Algoritmo_della_linea_di_Bresenham
+- http://disciplinas.ist.utl.pt/leic-cg/textos/livro/Rasterizacao.pdf
+- https://www.cs.helsinki.fi/group/goa/mallinnus/lines/bresenh.html
+
+
+
