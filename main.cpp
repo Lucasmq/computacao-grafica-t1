@@ -33,16 +33,22 @@ DrawLine(0,256,511,256,100,0,123,255);*/
 COR p = {255,0,0,255};
 COR p1 = {0,0,255,255};
 COR p2 = {0,255,0,255};
-VERTICES v = {0,256};
-VERTICES v1 ={256,60};
-VERTICES v2 ={450,256};
-VERTICES v3 ={0,511};
-VERTICES v4 ={256,256};
-VERTICES v5 ={480,480};
+VERTICES v  ={0,511};
+VERTICES v1 ={511,0};
+VERTICES v2 ={50,256};
+VERTICES v3 ={400,389};
+VERTICES v4 ={256,0};
+VERTICES v5 ={256,511};
+VERTICES v6 ={0,0};
+VERTICES v7 ={511,511};
+VERTICES v8 ={511,256};
 
-//DrawLine( v1, v2, p2, p);
-//DrawLineR(v1, v, v2, p1, p2);
-//DrawLineR(v2, v1, v, p2, p1);
+
+//DrawLine( v, v1, p2, p);
+DrawLine(v, v1, p1, p2);
+//DrawLine(v4, v5, p2, p1);
+//DrawLine(v6, v7, p2, p1);
+
 //PutPixel(v,p);
 
 //printf("\nValue.x = %d",value.x);
@@ -50,16 +56,23 @@ VERTICES v5 ={480,480};
 
 
 //printf("\n Pixel = %d", m[0]);
-//PutPixel(x1,y1,0,255,0,255);
+//PutPixel(v1,p2);
+//PutPixel(v4,p1);
 //DrawTriangle(v,v1,v2,p,p1,p2);
-preencherTriangulo(v,v1,v2,p,p2,p1);
+//preencherTriangulo(v6,v7,v8,p,p2,p1);
 //DrawTriangle(v3,v4,v5,p,p1,p2);
 //testeT(v,v1,v2,1,p,p1,p2);
-/*for(int i = 0; i <= 511; i++){
-	DrawLine(0, i, 511, 511-i,0,0,255,255);
-	DrawLine(i, 511, 511-i, 0,0,255,0,255);
-}
+/*for(int i = 0; i <= 500; i=i+100){
+	VERTICES k  ={0,i};
+	VERTICES l ={510,510-i};
 
+	VERTICES m  ={i,0};
+	VERTICES n ={510-i,510};
+	
+	DrawLine(k, l,p1,p1);
+	DrawLine(m, n,p1,p1);
+}
+*/
 //DrawLine(v1,v2,p1,p2);
 //DrawLine(v1,v2,p2,p1);
 /*DrawLine(411,10,255,255,152,0,123,255);

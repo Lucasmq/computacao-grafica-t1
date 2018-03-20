@@ -60,7 +60,9 @@ void DesenhaLinha(void)
 
 
 int PutPixel(VERTICES v, COR p){
+
 	int valor = 4*v.x + 4*v.y*IMAGE_WIDTH;
+
 	FBptr[valor + 0] = p.R;
 	FBptr[valor + 1] = p.G;
 	FBptr[valor + 2] = p.B;
@@ -91,9 +93,9 @@ void DrawLine(VERTICES v1, VERTICES v2, COR p, COR p1){
         dy = v2.y - v1.y;
 
         
-         dist = sqrt(pow(v2.x - v1.x,2) + pow(v2.y - v1.y,2));
+         //dist = sqrt(pow(v2.x - v1.x,2) + pow(v2.y - v1.y,2));
 
-       	if(-0.5 < m < 0 || m > 1 || m < -2 || m < -1){
+       	if(-0.5 < m < 0 || m > 1 || m < -2 || m < -1 || dx == 0){
        		        if (v1.y > v2.y){
 			            DrawLine(v2, v1, p1, p); // inverte recursivamente
 			             return;
@@ -119,15 +121,17 @@ void DrawLine(VERTICES v1, VERTICES v2, COR p, COR p1){
 
 	        //COR tempP;
 
-	        printf("\n Distancia = %d", dist);
-	        //dist = 120;
-	        Rf = (float(p1.R) - float(p.R))/(float(dist));
-	    	Gf = (float(p1.G) - float(p.G))/(float(dist));
-	    	Bf = (float(p1.B) - float(p.B))/(float(dist));
+	        //printf("\n Distancia = %d", dist);
+	        //dist = 120
+
+	        
+	        Rf = (float(p1.R) - float(p.R))/(float(dy));
+	    	Gf = (float(p1.G) - float(p.G))/(float(dy));
+	    	Bf = (float(p1.B) - float(p.B))/(float(dy));
 
 	        
 	        COR tempP = {p.R, p.G, p.B, p.A};
-	        //Rf = 1;
+
 	    	R = p.R;
 	    	G = p.G;
 	    	B = p.B;
@@ -140,7 +144,7 @@ void DrawLine(VERTICES v1, VERTICES v2, COR p, COR p1){
 	        	tempP.R = R;
 	        	tempP.G = G;
 	        	tempP.B = B;
-
+	        	printf("\n INCREMENTA EM Y");
 
 	            PutPixel(tempV, tempP);
 
@@ -180,9 +184,9 @@ void DrawLine(VERTICES v1, VERTICES v2, COR p, COR p1){
 	        COR tempP = {p.R, p.G, p.B, p.A};
 
 	       
-	        Rf = (float(p1.R) - float(p.R))/(float(dist));
-	    	Gf = (float(p1.G) - float(p.G))/(float(dist));
-	    	Bf = (float(p1.B) - float(p.B))/(float(dist));
+	        Rf = (float(p1.R) - float(p.R))/(float(dx));
+	    	Gf = (float(p1.G) - float(p.G))/(float(dx));
+	    	Bf = (float(p1.B) - float(p.B))/(float(dx));
 
 
 			R = p.R;
@@ -199,7 +203,7 @@ void DrawLine(VERTICES v1, VERTICES v2, COR p, COR p1){
 	        	tempP.R = R;
 	        	tempP.G = G;
 	        	tempP.B = B;
-
+printf("\n INCREMENTA EM X");
 	            PutPixel(tempV, tempP);
 
 	            if (d <= 0){
@@ -237,7 +241,7 @@ void DrawLine(VERTICES v1, VERTICES v2, COR p, COR p1){
         dy = v2.y - v1.y;
 
         VERTICES tempV;
-         dist = sqrt(pow(v2.x - v1.x,2) + pow(v2.y - v1.y,2));
+         //dist = sqrt(pow(v2.x - v1.x,2) + pow(v2.y - v1.y,2));
 
        	if(-0.5 < m < 0 || m > 1 || m < -2 || m < -1){
        		        if (v1.y > v2.y){
@@ -267,9 +271,9 @@ void DrawLine(VERTICES v1, VERTICES v2, COR p, COR p1){
 
 	        printf("\n Distancia = %d", dist);
 	        //dist = 120;
-	        Rf = (float(p1.R) - float(p.R))/(float(dist));
-	    	Gf = (float(p1.G) - float(p.G))/(float(dist));
-	    	Bf = (float(p1.B) - float(p.B))/(float(dist));
+	        Rf = (float(p1.R) - float(p.R))/(float(dx));
+	    	Gf = (float(p1.G) - float(p.G))/(float(dx));
+	    	Bf = (float(p1.B) - float(p.B))/(float(dx));
 
 	        //printf("\n Rf = %f", Rf);
 	        //printf("\n Gf = %f", Gf);
@@ -327,9 +331,9 @@ void DrawLine(VERTICES v1, VERTICES v2, COR p, COR p1){
 
 	        COR tempP = {p.R, p.G, p.B, p.A};
 
-	        Rf = (float(p1.R) - float(p.R))/(float(dist));
-	    	Gf = (float(p1.G) - float(p.G))/(float(dist));
-	    	Bf = (float(p1.B) - float(p.B))/(float(dist));
+	        Rf = (float(p1.R) - float(p.R))/(float(dx));
+	    	Gf = (float(p1.G) - float(p.G))/(float(dx));
+	    	Bf = (float(p1.B) - float(p.B))/(float(dx));
 
 	      
 			R = p.R;
@@ -367,7 +371,7 @@ void DrawLine(VERTICES v1, VERTICES v2, COR p, COR p1){
   	
 
 	//PintaTriangulo(va, vb, vc, p1, p1);
-	PintaTriangulo(vb, va, vc, p1, p1);
+	PintaTriangulo(vb, va, vc, p, p1);
 	PintaTriangulo(vc, vb, va, p1, p);
 
 
