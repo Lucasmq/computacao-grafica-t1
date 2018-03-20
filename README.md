@@ -91,57 +91,57 @@ Após a chamada é gerado um triangulo com as cores interpoladas.
 Foram feitas varias tentativas de preechimento do triângulo, a primeira tentativa foi encontrar o baricentro do triangulo e apartir dele criar retas que iriam do centro até cada ponto das retas que compõem os lados do triângulo.
 
 
-![alt text](função_baricentro)
+![alt text](https://github.com/Lucasmq/computacao-grafica-t1/blob/master/imagens/funcao_triangulo_baricentro.jpg)
 
 Triângulo gerado:
 
-![alt text](triangulo preenchido baricentro)
+![alt text](https://github.com/Lucasmq/computacao-grafica-t1/blob/master/imagens/triangulo_preenchido_baricentro.jpg)
 
 As 3 cores não ficaram bem interpoladas e da para ver alguns pixels que não foram preenchidos por conta do algoritmo de Bresenham.
 
 Também foi pensando da possibilidade de permanencer chamando a função de desenhar triangulo recursivamente diminuindo o triângulo até chegar no menor possivel, que no caso seria o baricentro, mas não foi implementado um codigo que trate bem para todos os casos, foi mais por curiosidade.
 
-![alt text](função triangulo recursivo)
+![alt text](https://github.com/Lucasmq/computacao-grafica-t1/blob/master/imagens/funcao_triangulo_interpolado_recursivamente.jpg)
 
 Triângulo gerado:
 
-![alt text](triangulo recursivo)
+![alt text](https://github.com/Lucasmq/computacao-grafica-t1/blob/master/imagens/triangulo_interpolado_recursivamente.jpg)
 
 A interpolação nesse melhorou muito em comparação ao outro, mas ainda apresenta alguns bugs, e também essa função não está pronta para receber qualquer vertices, foi somente para curiosidade.
 
 
 Outro método pensado foi a criação de vários triângulos um detro do outro sofrendo uma variação de escala e um offset já que ele não está na origem.
 
-![alt text](função triangulo escala)
+![alt text](https://github.com/Lucasmq/computacao-grafica-t1/blob/master/imagens/funcao_triangulo_interpolado_escala.jpg)
 
 Triângulo gerado:
 
-![alt text](triagulo escala_95)
+![alt text](https://github.com/Lucasmq/computacao-grafica-t1/blob/master/imagens/triangulo_interpolado_escala_95.jpg)
 
 Como podemos ver o triângulo fica todo vazado, mas se aumentar o fator de multiplicação e o número de triângulos gerados podemos ver uma melhoria no preenchimento, mas mesmo assim não satisfatório.
 
-![alt text](triangulo escala 98 400)
+![alt text](https://github.com/Lucasmq/computacao-grafica-t1/blob/master/imagens/triangulo_interpolado_escala_98_400.jpg)
 
 
 Por fim, o último testado foi o que escolhe um vertice, e a partir dele gera varias retas que se juntam com cada ponto da reta gerado, formando no fim o triângulo. Mas essa forma só interpola 2 cores ao triangulo.
 
-![alt text](função triangulo retas)
+![alt text](https://github.com/Lucasmq/computacao-grafica-t1/blob/master/imagens/funcao_triangulo_retas.jpg)
 
 Triâgulo gerado:
 
-![alt text](triangulo retas interpolado)
+![alt text](https://github.com/Lucasmq/computacao-grafica-t1/blob/master/imagens/triangulo_retas_interpolado.jpg)
 
 O triângulo apresenta alguns lugares sem preenchimento por conta do algoritmo de Bresenham, o que pode ser feito é gerar outro triângulo a partir e outro vertice, preenchendo os pixels pretos.
 
-![alt text](função triangulo retas2)
+![alt text](https://github.com/Lucasmq/computacao-grafica-t1/blob/master/imagens/funcao_triangulo_retas_2.jpg)
 
 Triâgulo gerado:
 
-![alt text](triangulo retas interpolado 2)
+![alt text](https://github.com/Lucasmq/computacao-grafica-t1/blob/master/imagens/triangulo_retas_interpolado2.jpg)
 
 E por fim, se preferir usar um triângulo de uma unica cor, basta chamar a função com as mesmas cores, assim preenchendo o triâgulo por completo.
 
-![alt text](triangulo preenchido cor)
+![alt text](https://github.com/Lucasmq/computacao-grafica-t1/blob/master/imagens/triangulo_retas_cor.jpg)
 
 ## Considerações Finais
 
