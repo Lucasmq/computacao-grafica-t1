@@ -46,15 +46,13 @@ void DesenhaPixels(void)
 	FBptr[11] = 255; // componente A
 }
 
-void DesenhaLinha(void)
-{
+void DesenhaLinha(void){
 	for (unsigned int i=0; i<250; i++){
 		FBptr[4*i + 4*i*IMAGE_WIDTH + 0] = 255;
 		FBptr[4*i + 4*i*IMAGE_WIDTH + 1] = 0;
 		FBptr[4*i + 4*i*IMAGE_WIDTH + 2] = 255;
 		FBptr[4*i + 4*i*IMAGE_WIDTH + 3] = 255;
-}
-
+	}
 
 }
 
@@ -84,16 +82,13 @@ void DrawLine(VERTICES v1, VERTICES v2, COR p, COR p1){
         if(v1.x == v2.x){
         	m = -1;
         }else{
-			m = (float(v2.y)-float(v1.y))/(float(v2.x) - float(v1.x));
+			m = (float(v2.y)-float(v1.y))/(float(v2.x) - float(v1.x)); // calculo do coeficiente angular
 		}
-		//printf("\n m = %f",m);  
-    
+
         dx = v2.x - v1.x;
         
         dy = v2.y - v1.y;
 
-        
-         //dist = sqrt(pow(v2.x - v1.x,2) + pow(v2.y - v1.y,2));
 
        	if(-0.5 < m < 0 || m > 1 || m < -2 || m < -1 || dx == 0){
        		        if (v1.y > v2.y){
@@ -101,7 +96,6 @@ void DrawLine(VERTICES v1, VERTICES v2, COR p, COR p1){
 			             return;
 			        }   
 
-       		//printf("\n m < 0 ");
 	        if (dx < 0){            
 	            slope = -1;
 	            dx = -dx;
@@ -109,23 +103,15 @@ void DrawLine(VERTICES v1, VERTICES v2, COR p, COR p1){
 	        else{            
 	           slope = 1;
 	        }
-	        // Constante de Bresenham
-	        
+
 	        incE = 2 * dx;
 	        incNE = 2 * dx - 2 * dy;
 	        d = 2 * dx - dy;
 	        VERTICES tempV;
-	        
-	        //tempP = {p.R, p.G, p.B, p.A}
+
 	        tempV.x = v1.x;
 
-	        //COR tempP;
-
-	        //printf("\n Distancia = %d", dist);
-	        //dist = 120
-
-
-	        Rf = (float(p1.R) - float(p.R))/(float(dy));
+	        Rf = (float(p1.R) - float(p.R))/(float(dy)); // calculo do incremento das cores
 	    	Gf = (float(p1.G) - float(p.G))/(float(dy));
 	    	Bf = (float(p1.B) - float(p.B))/(float(dy));
 
@@ -138,13 +124,12 @@ void DrawLine(VERTICES v1, VERTICES v2, COR p, COR p1){
 	    	A = p.A;
 
 	        for (tempV.y = v1.y; tempV.y <= v2.y; tempV.y++){
-	        	R += Rf;
+	        	R += Rf;		// incrementa aos componentes
 	        	G += Gf;
 	        	B += Bf;
 	        	tempP.R = R;
 	        	tempP.G = G;
 	        	tempP.B = B;
-	        	//printf("\n INCREMENTA EM Y");
 
 	            PutPixel(tempV, tempP);
 
@@ -161,7 +146,7 @@ void DrawLine(VERTICES v1, VERTICES v2, COR p, COR p1){
 			            DrawLine(v2, v1, p1, p); // inverte recursivamente
 			             return;
 			        } 
-    		//printf("\n m > 0 ");
+
 	        if (dy < 0){            
 	            slope = -1;
 	            dy = -dy;
@@ -176,15 +161,10 @@ void DrawLine(VERTICES v1, VERTICES v2, COR p, COR p1){
 	        VERTICES tempV;
 	        tempV.y = v1.y;
 
-	        //COR tempP;
-	        
-	       
-	        //printf("\n Dist = %d", dist);
-
 	        COR tempP = {p.R, p.G, p.B, p.A};
 
 	       
-	        Rf = (float(p1.R) - float(p.R))/(float(dx));
+	        Rf = (float(p1.R) - float(p.R))/(float(dx)); // calculo do incremento das cores
 	    	Gf = (float(p1.G) - float(p.G))/(float(dx));
 	    	Bf = (float(p1.B) - float(p.B))/(float(dx));
 
@@ -194,16 +174,15 @@ void DrawLine(VERTICES v1, VERTICES v2, COR p, COR p1){
 	    	B = p.B;
 	    	A = p.A;
 
-	    	//Rf = 1;
 
 	        for (tempV.x = v1.x; tempV.x <= v2.x; tempV.x++){
-	        	R += Rf;
+	        	R += Rf;			// incrementa aos componentes
 	        	G += Gf;
 	        	B += Bf;
 	        	tempP.R = R;
 	        	tempP.G = G;
 	        	tempP.B = B;
-//printf("\n INCREMENTA EM X");
+
 	            PutPixel(tempV, tempP);
 
 	            if (d <= 0){
@@ -225,7 +204,6 @@ void DrawLine(VERTICES v1, VERTICES v2, COR p, COR p1){
         float Rf, Gf, Bf;
         float R,G,B,A;
         VERTICES aux;
-        //VERTICES b;
         
         int dist;
         
@@ -234,14 +212,14 @@ void DrawLine(VERTICES v1, VERTICES v2, COR p, COR p1){
         }else{
 			m = (float(v2.y)-float(v1.y))/(float(v2.x) - float(v1.x));
 		}
-		//printf("\n m = %f",m);  
+ 
     
         dx = v2.x - v1.x;
         
         dy = v2.y - v1.y;
 
         VERTICES tempV;
-         //dist = sqrt(pow(v2.x - v1.x,2) + pow(v2.y - v1.y,2));
+
 
        	if(-0.5 < m < 0 || m > 1 || m < -2 || m < -1){
        		        if (v1.y > v2.y){
@@ -249,7 +227,6 @@ void DrawLine(VERTICES v1, VERTICES v2, COR p, COR p1){
 			             return;
 			        }   
 
-       		//printf("\n m < 0 ");
 	        if (dx < 0){            
 	            slope = -1;
 	            dx = -dx;
@@ -262,33 +239,23 @@ void DrawLine(VERTICES v1, VERTICES v2, COR p, COR p1){
 	        incE = 2 * dx;
 	        incNE = 2 * dx - 2 * dy;
 	        d = 2 * dx - dy;
-	        
-	        
-	        //tempP = {p.R, p.G, p.B, p.A}
+
 	        tempV.x = v1.x;
 
-	        //COR tempP;
-
-	        //printf("\n Distancia = %d", dist);
-	        //dist = 120;
-	        Rf = (float(p1.R) - float(p.R))/(float(dx));
+	        Rf = (float(p1.R) - float(p.R))/(float(dx)); // calculo do incremento das cores
 	    	Gf = (float(p1.G) - float(p.G))/(float(dx));
 	    	Bf = (float(p1.B) - float(p.B))/(float(dx));
 
-	        //printf("\n Rf = %f", Rf);
-	        //printf("\n Gf = %f", Gf);
-	        //printf("\n Bf = %f", Bf);
-
 	        COR tempP = {p.R, p.G, p.B, p.A};
-	        //Rf = 1;
+	       
 	    	R = p.R;
 	    	G = p.G;
 	    	B = p.B;
 	    	A = p.A;
 
 	        for (tempV.y = v1.y; tempV.y <= v2.y; tempV.y++){
-	        	R += Rf;
-	        	G += Gf;
+	        	R += Rf;			// incrementa aos componentes
+	        	G += Gf;	
 	        	B += Bf;
 	        	tempP.R = R;
 	        	tempP.G = G;
@@ -309,7 +276,7 @@ void DrawLine(VERTICES v1, VERTICES v2, COR p, COR p1){
 			            PintaTriangulo(inicial,v2, v1, p1, p); // inverte recursivamente
 			             return;
 			        } 
-    		//printf("\n m > 0 ");
+
 	        if (dy < 0){            
 	            slope = -1;
 	            dy = -dy;
@@ -324,14 +291,11 @@ void DrawLine(VERTICES v1, VERTICES v2, COR p, COR p1){
 	        
 	        tempV.y = v1.y;
 
-	        //COR tempP;
-	        
-	       
-	        //printf("\n Dist = %d", dist);
+
 
 	        COR tempP = {p.R, p.G, p.B, p.A};
 
-	        Rf = (float(p1.R) - float(p.R))/(float(dx));
+	        Rf = (float(p1.R) - float(p.R))/(float(dx)); // calculo do incremento das cores
 	    	Gf = (float(p1.G) - float(p.G))/(float(dx));
 	    	Bf = (float(p1.B) - float(p.B))/(float(dx));
 
@@ -341,7 +305,6 @@ void DrawLine(VERTICES v1, VERTICES v2, COR p, COR p1){
 	    	B = p.B;
 	    	A = p.A;
 
-	    	//Rf = 1;
 
 	        for (tempV.x = v1.x; tempV.x <= v2.x; tempV.x++){
 	        	R += Rf;
@@ -363,37 +326,34 @@ void DrawLine(VERTICES v1, VERTICES v2, COR p, COR p1){
 	        }
 	    }
 
-	    //DrawLine(inicial, tempV, p, p1);
 	  }
 
 
 
   void preencherTrianguloBaricentro(VERTICES va, VERTICES vb, VERTICES vc, COR p, COR p1, COR p2){
   	
-  	VERTICES vBar = {(va.x+vb.x+vc.x)/3,(va.y+vb.y+vc.y)/3};
-	//PintaTriangulo(va, vb, vc, p1, p1);
+  	VERTICES vBar = {(va.x+vb.x+vc.x)/3,(va.y+vb.y+vc.y)/3}; // calcula o baricentro
+	
 	PintaTriangulo(vBar, va, vb, p, p1);
 	PintaTriangulo(vBar, vb, vc, p1, p2);
 	PintaTriangulo(vBar, vc, va, p2, p);
 
- }	//PintaTriangulo(va, vb, vc, p1, p1);
-	//PintaTriangulo(vb, va, vc, p, p1);
+ }
 
-
- void preencherTriangulo(VERTICES va, VERTICES vb, VERTICES vc, COR p, COR p1, COR p2){
+ void preencherTriangulo(VERTICES va, VERTICES vb, VERTICES vc, COR p, COR p1, COR p2){ // preenche triangulos pelas retas
   	
   	PintaTriangulo(vb, va, vc, p, p);
 	PintaTriangulo(vc, vb, va, p1, p);
 
  }
 
-void DrawTriangle(VERTICES va, VERTICES vb, VERTICES vc, COR p, COR p1, COR p2){
+void DrawTriangle(VERTICES va, VERTICES vb, VERTICES vc, COR p, COR p1, COR p2){ // desenha o triangulo vazio interpolado
 	DrawLine(va,vb,p,p1);
 	DrawLine(vb,vc,p1,p2);
 	DrawLine(vc,va,p2,p);
 }
 
- void preencherTrianguloRecursivo(VERTICES va, VERTICES vb, VERTICES vc, COR p, COR p1, COR p2){
+ void preencherTrianguloRecursivo(VERTICES va, VERTICES vb, VERTICES vc, COR p, COR p1, COR p2){ // função por curiosidade que não se aplica a outros vertices
   	
   	VERTICES vBar = {(va.x+vb.x+vc.x)/3,(va.y+vb.y+vc.y)/3};
 	//PintaTriangulo(va, vb, vc, p1, p1);
@@ -414,7 +374,7 @@ void DrawTriangle(VERTICES va, VERTICES vb, VERTICES vc, COR p, COR p1, COR p2){
 	preencherTrianguloRecursivo(va,vb,vc,p,p1,p2);
  }
 
-void trianguloEscala(VERTICES va, VERTICES vb, VERTICES vc, COR p, COR p1, COR p2){
+void trianguloEscala(VERTICES va, VERTICES vb, VERTICES vc, COR p, COR p1, COR p2){ 
 	float j;
 	int xbar,ybar,distx,disty,auxx,auxy;
 
